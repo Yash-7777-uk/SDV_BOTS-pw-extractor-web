@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Select Subject and Content Type</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header custom-header">
+                <h1 class="display-6">Select Content Type</h1>
+            </div>
+            <div class="card-body bg-light-grey">
+                <form action="/contents" method="post">
+                    <input type="hidden" name="auth_code" value="{{ auth_code }}">
+                    <input type="hidden" name="batch_id" value="{{ batch_id }}">
+                    
+                    <div class="form-group mb-4">
+                        <label for="subject_id" class="form-label">Select Subject</label>
+                        <select name="subject_id" id="subject_id" class="form-select" required>
+                            {% for subject in subjects %}
+                            <option value="{{ subject['_id'] }}" data-name="{{ subject['subject'] }}">{{ subject['subject'] }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label for="content_type" class="form-label">Select Content Type</label>
+                        <select name="content_type" id="content_type" class="form-select" required>
+                            <option value="exercises-notes-videos">Videos</option>
+                            <option value="notes">Notes</option>
+                            <option value="DppNotes">Dpp Notes</option>
+                            <option value="DppSolution">DPP Solutions</option>
+                        </select>
+                    </div>
+
+                    <input type="hidden" name="subject_name" id="subject_name" value="">
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-success btn-lg">Download Contents</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="particles-js"></div>
+
+    <script>
+        const subjectDropdown = document.getElementById('subject_id');
+        const subjectNameInput = document.getElementById('subject_name');
+        
+        subjectDropdown.addEventListener('change', function () {
+            const selectedOption = subjectDropdown.options[subjectDropdown.selectedIndex];
+            subjectNameInput.value = selectedOption.text;
+        });
+
+        subjectNameInput.value = subjectDropdown.options[subjectDropdown.selectedIndex].text;
+    </script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="/static/particles-config.js"></script>
+</body>
+</html>

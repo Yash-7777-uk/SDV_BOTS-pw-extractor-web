@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>Select Batch</title>
+</head>
+<body>
+     <div id="particles-js"></div>
+    <div class="container mt-5">
+        <div class="card shadow-lg border-0">
+            <div class="card-header bg-primary text-white text-center">
+                <h1 class="display-6">Your Batches</h1>
+            </div>
+            <div class="card-body">
+                <p class="text-center">Select a batch to view its subjects</p>
+                <ul class="list-group">
+                    {% for batch in batches %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>{{ batch['name'] }}</span>
+                        <a href="{{ url_for('subjects', batch_id=batch['_id'], auth_code=auth_code) }}" class="btn btn-primary">View Subjects</a>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+<script src="/static/particles-config.js"></script>
+</html>
