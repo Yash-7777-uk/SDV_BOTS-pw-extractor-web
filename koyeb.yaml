@@ -1,0 +1,13 @@
+name: flask-app
+services:
+  - name: web
+    instance_type: free
+    git:
+      repository: https://github.com/Yash-7777-uk/SDV_BOTS-pw-extractor-web
+      branch: master
+    build:
+      builder: pip
+      command: python app.py
+    ports:
+      - port: 5000
+        http: true
